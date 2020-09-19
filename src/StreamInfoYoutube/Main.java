@@ -1,4 +1,4 @@
-package StreamInfoYoutube;
+package streamInfoYoutube;
 
 import java.io.File;
 import java.io.IOException;
@@ -21,6 +21,7 @@ public class Main extends JavaPlugin {
 			
 			try {
 				
+				getDataFolder().mkdirs();
 				config.createNewFile();
 				
 			} catch (IOException e) {}

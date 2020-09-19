@@ -1,4 +1,4 @@
-package StreamInfoYoutube;
+package streamInfoYoutube;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -9,7 +9,7 @@ import java.util.Map;
 
 public class YouTube {
 
-	static protected String api = "";
+	protected static String api = "";
 	private String videoID;
 	private String liveChatID;
 	private String urlVideo = "https://www.googleapis.com/youtube/v3/videos";
