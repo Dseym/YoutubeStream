@@ -12,10 +12,19 @@
 2. Have fun!
 
 ## Instruction
-1. Get your [googleAPI](https://console.developers.google.com/apis), [instructions](https://rapidapi.com/blog/how-to-get-youtube-api-key/)
+1. Get your googleAPI, just below
 2. Create a folder in plugins called StreamInfoYoutube
 3. Create a config.yml file there
 4. In the file, write - api: googleAPI
+
+## Getting googleAPI
+1. Log in or create an account at https://developers.google.com/.
+2. Follow this link https://console.developers.google.com/project and click the CREATE PROJECT button
+3. Specify a title and click Create
+4. On the top left, click on the 3 dashes and select API and Services, then select ENABLE APIS AND SERVICES
+5. Scroll down and find Youtube Data API v3, click on it and click the Enable button, wait
+6. Go to Credentials and click the Create Credentials, API Key button
+7. In the line your API key is your googleAPI
 
 ## API
 ```
@@ -39,10 +48,19 @@
 2. Веселитесь!
 
 ## Инструкции
-1. Получите свой [googleAPI](https://console.developers.google.com/apis), [инструкции](https://rapidapi.com/blog/how-to-get-youtube-api-key/)
+1. Получите свой googleAPI, чуть ниже
 2. Создайте папку в plugins с названием StreamInfoYoutube
 3. Создайте файл config.yml в папке
 4. И напишите в файл - api: googleAPI
+
+## Получение googleAPI
+1. Войти в систему или создать учетную запись на https://developers.google.com/.
+2. Перейдите по этой ссылке https://console.developers.google.com/project и нажмите кнопку СОЗДАЙТЕ ПРОЕКТ
+3. Укажите название и нажмите кнопку Создать
+4. Слева сверху нажмите на 3 тире и выберите API и Сервисы, после выберите ENABLE APIS AND SERVICES
+5. Полестайте вниз и найдите Youtube Data API v3, нажмите на него и нажмите кнопку Включить, ждите
+6. Перейдите в Учетные данные и нажмите кнопку Создать Учетный данные, ключ API
+7. В строке Ваш ключ API это и есть ваш googleAPI
 
 ## API
 ```
