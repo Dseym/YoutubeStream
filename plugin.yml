@@ -1,3 +1,3 @@
-name: StreamInfoYoutube
+name: YouTubeStream
 version: 1.0
-main: streamInfoYoutube.Main
+main: ru.dseymo.youtubeStream.Main
