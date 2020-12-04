@@ -8,7 +8,7 @@
 3. Now you have the code that you can edit!
 
 ## Install for Server
-1. Download the compiled [StreamInfoYouTube](https://github.com/Dseym/streamInfoYouTube/releases/download/streamInfoYouTube/streamInfoYouTube.jar) and upload it to your server.
+1. Download the compiled [StreamInfoYouTube](https://github.com/Dseym/streamInfoYouTube/releases/download/youtubeStream/youtubeStream.jar) and upload it to your server.
 2. Have fun!
 
 ## Getting googleAPI
@@ -45,7 +45,7 @@ youtube.connect();
 3. Теперь у Вас есть код для редактирования!
 
 ## Установка на сервер
-1. Скачайте скомпилированный [StreamInfoYouTube](https://github.com/Dseym/streamInfoYouTube/releases/download/streamInfoYouTube/streamInfoYouTube.jar) и загрузите на свой сервер.
+1. Скачайте скомпилированный [StreamInfoYouTube](https://github.com/Dseym/streamInfoYouTube/releases/download/youtubeStream/youtubeStream.jar) и загрузите на свой сервер.
 2. Веселитесь!
 
 ## Получение googleAPI
