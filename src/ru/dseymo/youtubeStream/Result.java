@@ -9,11 +9,17 @@ public enum Result {
 	ALREADY_CONNECTED("The connection has already been made"),
 	ERROR("An unknown error has occurred");
 	
-	String mess;
+	private String mess;
 	
 	Result(String mess) {
 		
 		this.mess = mess;
+		
+	}
+	
+	public String getMessage() {
+		
+		return mess;
 		
 	}
 	

@@ -141,4 +141,11 @@ public class YouTube {
 		
 	}
 	
+	@Override
+	public void finalize() {
+		
+		disconnect();
+		
+	}
+	
 }
