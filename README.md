@@ -30,10 +30,17 @@ IMessagesListener listener = new IMessagesListener() {
 		System.out.println(nick + ": " + message);
 		
 	}
+
+	@Override
+	public void onCommand(String nick, String command, String[] args) {
+		
+		System.out.println(nick + ": " + command + Arrays.toString(args));
+		
+	}
 	
 };
 
-YouTube youtube = new YouTube(videoID, api, listener);
+YouTube youtube = new YouTube(videoID, api, prefCommand, listener);
 
 youtube.connect();
 ```
@@ -67,10 +74,17 @@ IMessagesListener listener = new IMessagesListener() {
 		System.out.println(nick + ": " + message);
 		
 	}
+
+	@Override
+	public void onCommand(String nick, String command, String[] args) {
+		
+		System.out.println(nick + ": " + command + Arrays.toString(args));
+		
+	}
 	
 };
 
-YouTube youtube = new YouTube(videoID, api, listener);
+YouTube youtube = new YouTube(videoID, api, prefCommand, listener);
 
 youtube.connect();
 ```
