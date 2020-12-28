@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.Arrays;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -15,13 +16,15 @@ public class YouTube {
 	private String urlChat = "https://www.googleapis.com/youtube/v3/liveChat/messages";
 	private String nameStream;
 	private String api;
+	private char prefCommand;
 	private Timer timer;
 	private IMessagesListener listener;
 	
-	public YouTube(String videoID, String api, IMessagesListener listener) {
+	public YouTube(String videoID, String api, char prefCommand, IMessagesListener listener) {
 		
 		this.videoID = videoID;
 		this.api = api;
+		this.prefCommand = prefCommand;
 		this.listener = listener;
 		
 	}
@@ -127,9 +130,17 @@ public class YouTube {
 					
 				}
 				
-				String[] mess = content.toString().split("\"displayMessage\": \"");
-				for(int i = 1; i < mess.length; i++)
-					listener.onMessage(content.toString().split("\"displayName\": \"")[i].split("\",")[0], mess[i].split("\",")[0]);
+				String[] messages = content.toString().split("\"displayMessage\": \"");
+				for(int i = 1; i < messages.length; i++) {
+					
+					String nick = content.toString().split("\"displayName\": \"")[i].split("\",")[0];
+					String mess = messages[i].split("\",")[0];
+					if(mess.charAt(0) == prefCommand)
+						listener.onCommand(nick, mess.substring(1).split(" ")[0], Arrays.copyOfRange(mess.split(" "), 1, mess.split(" ").length));
+					else
+						listener.onMessage(nick, mess);
+					
+				}
 				
 			}
 			
