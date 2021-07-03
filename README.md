@@ -1,15 +1,26 @@
-# youTubeStream
-Плагин-библиотека позволяет связать майнкрафт и стрим на ютубе / The plugin-lib allows you to link Minecraft and YouTube stream
+# YoutubeStream
+This library allows you to monitor the stream and chat of the stream on YouTube.
 
 # ENG
-## Compile
-1. Download the source code and upload it to Eclipse for example.
-2. Add External JARs: [Server Core](https://getbukkit.org/download/craftbukkit) 1.8-1.16.
-3. Now you have the code that you can edit!
+## Using
+You can use this library in your project using Maven.
+pom.xml
+```xml
+<repositories>
+  <repository>
+  	<id>Dseymo-Repo</id>
+  	<url>http://f0461095.xsph.ru</url>
+  </repository>
+</repositories>
 
-## Install for Server
-1. Download the compiled [YouTubeStream](https://github.com/Dseym/streamInfoYouTube/releases/download/youtubeStream/youtubeStream.jar) and upload it to your server.
-2. Have fun!
+<dependencies>
+  <dependency>
+	<groupId>ru.dseymo.youtubestream</groupId>
+	<artifactId>YoutubeStream</artifactId>
+	<version>1.0</version>
+  </dependency>
+</dependencies>
+```
 
 ## Getting googleAPI
 1. Log in or create an account at https://developers.google.com/.
@@ -20,40 +31,59 @@
 6. Go to Credentials and click the Create Credentials, API Key button
 7. In the line your API key is your googleAPI
 
-## Using
+## API
 ```java
 IMessagesListener listener = new IMessagesListener() {
-			
+	
 	@Override
-	public void onMessage(String nick, String message) {
-		
-		System.out.println(nick + ": " + message);
-		
+	public void onSuperChatMessage(SuperMessage message) {
+		System.out.println("New SuperChat Message");
 	}
-
+	
 	@Override
-	public void onCommand(String nick, String command, String[] args) {
-		
-		System.out.println(nick + ": " + command + Arrays.toString(args));
-		
+	public void onNewSponsor(Author sponsor) {
+		System.out.println("New Sponsor");
+	}
+	
+	@Override
+	public void onMessage(Message message) {
+		System.out.println("New Message");
+	}
+	
+	@Override
+	public void onCommand(Command command) {
+		System.out.println("New Command");
 	}
 	
 };
 
-YouTube youtube = new YouTube(videoID, api, prefCommand, listener);
+YouTube youtube = new YouTube();
 
-youtube.connect();
+youtube.connect(videoID, googleAPI);
+
+youtube.addListener(listener);
 ```
 
 # RUS
-## Компиляция
-1. Скачайте исходный код и загрузите, к примеру, в Eclipse.
-2. Добавьте External Jars в проект: [Серверное ядро](https://getbukkit.org/download/craftbukkit) 1.8-1.16.
-3. Теперь у Вас есть код для редактирования!
+## Использование
+Вы можете использовать эту библиотеку в своем проекте с помощью Maven.
+pom.xml
+```xml
+<repositories>
+  <repository>
+  	<id>Dseymo-Repo</id>
+  	<url>http://f0461095.xsph.ru</url>
+  </repository>
+</repositories>
 
-## Установка на сервер
-1. Скачайте скомпилированный [YouTubeStream](https://github.com/Dseym/streamInfoYouTube/releases/download/youtubeStream/youtubeStream.jar) и загрузите на свой сервер.
-2. Веселитесь!
+<dependencies>
+  <dependency>
+	<groupId>ru.dseymo.youtubestream</groupId>
+	<artifactId>YoutubeStream</artifactId>
+	<version>1.0</version>
+  </dependency>
+</dependencies>
+```
 
 ## Получение googleAPI
 1. Войти в систему или создать учетную запись на https://developers.google.com/.
@@ -64,29 +94,35 @@ youtube.connect();
 6. Перейдите в Учетные данные и нажмите кнопку Создать Учетный данные, ключ API
 7. В строке Ваш ключ API это и есть ваш googleAPI
 
-## Using
+## API
 ```java
 IMessagesListener listener = new IMessagesListener() {
-			
+	
 	@Override
-	public void onMessage(String nick, String message) {
-		
-		System.out.println(nick + ": " + message);
-		
+	public void onSuperChatMessage(SuperMessage message) {
+		System.out.println("New SuperChat Message");
 	}
-
+	
 	@Override
-	public void onCommand(String nick, String command, String[] args) {
-		
-		System.out.println(nick + ": " + command + Arrays.toString(args));
-		
+	public void onNewSponsor(Author sponsor) {
+		System.out.println("New Sponsor");
+	}
+	
+	@Override
+	public void onMessage(Message message) {
+		System.out.println("New Message");
+	}
+	
+	@Override
+	public void onCommand(Command command) {
+		System.out.println("New Command");
 	}
 	
 };
 
-YouTube youtube = new YouTube(videoID, api, prefCommand, listener);
+YouTube youtube = new YouTube();
 
-youtube.connect();
+youtube.connect(videoID, googleAPI);
+
+youtube.addListener(listener);
 ```
-
-Для свободного использование.
