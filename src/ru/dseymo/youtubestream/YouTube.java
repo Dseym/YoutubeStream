@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Timer;
 
 import org.jsoup.Connection;
+import org.jsoup.HttpStatusException;
 import org.jsoup.Jsoup;
 
 import com.google.gson.JsonArray;
@@ -42,31 +43,24 @@ public class YouTube {
 			timer = new Timer();
 			
 			timer.scheduleAtFixedRate(new YoutubeTask(this, stream.liveChatId, googleAPI), 1000, timeUpdateChatInSec*1000);
-		}
+		} else
+			stream = null;
 		
 		return result;
 	}
 	
 	public Result update(String googleAPI) {
+		if(googleAPI == null || googleAPI.isEmpty())
+			return Result.WRONG_API;
+		
 		try {
 			Connection c = Jsoup.connect(API_URL_VIDEO + "?part=liveStreamingDetails&part=snippet&id=" + stream.videoId + "&key=" + googleAPI);
 			
 			c.userAgent("Chrome");
 			c.header("Content-Type", "application/json");
+			c.ignoreContentType(true);
 			
-			JsonObject resp = new JsonParser().parse(c.ignoreContentType(true).execute().body()).getAsJsonObject();
-			JsonObject error = resp.getAsJsonObject("error");
-			
-			if(error != null) {
-				String reason = error.getAsJsonArray("errors").get(0).getAsJsonObject().getAsJsonObject("reason").getAsString();
-				int code = error.getAsJsonObject("code").getAsInt();
-				
-				if(reason.equalsIgnoreCase("badRequest") && code == 400)
-					return Result.WRONG_API;
-				else if(reason.equalsIgnoreCase("quotaExceeded"))
-					return Result.QUOTA;
-			}
-			
+			JsonObject resp = new JsonParser().parse(c.execute().body()).getAsJsonObject();
 			JsonArray items = resp.getAsJsonArray("items");
 			
 			if(items.size() == 0)
@@ -86,6 +80,13 @@ public class YouTube {
 			stream.viewers = infoStream.getAsJsonPrimitive("concurrentViewers").getAsInt();
 			stream.liveChatId = infoStream.getAsJsonPrimitive("activeLiveChatId").getAsString();
 			stream.timeStart = format.parse(infoStream.getAsJsonPrimitive("actualStartTime").getAsString()).getTime();
+		} catch (HttpStatusException e) {
+			int code = e.getStatusCode();
+			
+			if(code == 400)
+				return Result.WRONG_API;
+			else if(code == 403)
+				return Result.QUOTA;
 		} catch (Exception e) {
 			e.printStackTrace();
 			
