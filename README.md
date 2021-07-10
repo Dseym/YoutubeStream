@@ -17,7 +17,7 @@ pom.xml
   <dependency>
 	<groupId>ru.dseymo.youtubestream</groupId>
 	<artifactId>YoutubeStream</artifactId>
-	<version>1.0</version>
+	<version>1.1</version>
   </dependency>
 </dependencies>
 ```
@@ -34,6 +34,11 @@ pom.xml
 ## API
 ```java
 IMessagesListener listener = new IMessagesListener() {
+	
+	@Override
+	public void onUpdate() {
+		System.out.println("Reading Chat");
+	}
 	
 	@Override
 	public void onSuperChatMessage(SuperMessage message) {
@@ -80,7 +85,7 @@ pom.xml
   <dependency>
 	<groupId>ru.dseymo.youtubestream</groupId>
 	<artifactId>YoutubeStream</artifactId>
-	<version>1.0</version>
+	<version>1.1</version>
   </dependency>
 </dependencies>
 ```
@@ -97,6 +102,11 @@ pom.xml
 ## API
 ```java
 IMessagesListener listener = new IMessagesListener() {
+	
+	@Override
+	public void onUpdate() {
+		System.out.println("Reading Chat");
+	}
 	
 	@Override
 	public void onSuperChatMessage(SuperMessage message) {

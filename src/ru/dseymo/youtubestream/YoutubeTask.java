@@ -37,6 +37,9 @@ public class YoutubeTask extends TimerTask {
 			if(token != null)
 				pageToken = token.getAsString();
 			
+			for(IMessagesListener list: youtube.listeners)
+				list.onUpdate();
+			
 			for(JsonElement item: json.getAsJsonArray("items")) {
 				JsonObject obj = item.getAsJsonObject();
 				JsonObject info = obj.getAsJsonObject("snippet");

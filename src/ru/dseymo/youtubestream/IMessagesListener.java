@@ -2,6 +2,8 @@ package ru.dseymo.youtubestream;
 
 public interface IMessagesListener {
 	
+	public void onUpdate();
+	
 	public void onMessage(Message message);
 	
 	public void onSuperChatMessage(SuperMessage message);
