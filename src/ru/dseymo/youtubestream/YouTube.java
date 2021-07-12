@@ -43,6 +43,9 @@ public class YouTube {
 			timer = new Timer();
 			
 			timer.scheduleAtFixedRate(new YoutubeTask(this, stream.liveChatId, googleAPI), 1000, timeUpdateChatInSec*1000);
+			
+			for(IMessagesListener listener: listeners)
+				listener.onConnect();
 		} else
 			stream = null;
 		
@@ -82,13 +85,22 @@ public class YouTube {
 			stream.timeStart = format.parse(infoStream.getAsJsonPrimitive("actualStartTime").getAsString()).getTime();
 		} catch (HttpStatusException e) {
 			int code = e.getStatusCode();
+			Result result = Result.ERROR;
 			
 			if(code == 400)
-				return Result.WRONG_API;
+				result = Result.WRONG_API;
 			else if(code == 403)
-				return Result.QUOTA;
+				result = Result.QUOTA;
+			
+			for(IMessagesListener listener: listeners)
+				listener.onError(result, e);
+			
+			return result;
 		} catch (Exception e) {
 			e.printStackTrace();
+			
+			for(IMessagesListener listener: listeners)
+				listener.onError(Result.ERROR, e);
 			
 			return Result.ERROR;
 		}
@@ -101,8 +113,12 @@ public class YouTube {
 	}
 	
 	public void disconnect() {
-		if(isConnected())
+		if(isConnected()) {
 			timer.cancel();
+			
+			for(IMessagesListener listener: listeners)
+				listener.onDisconnect();
+		}
 		
     	timer = null;
     	stream = null;

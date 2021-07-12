@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.TimerTask;
 
 import org.jsoup.Connection;
+import org.jsoup.HttpStatusException;
 import org.jsoup.Jsoup;
 
 import com.google.gson.JsonElement;
@@ -95,9 +96,29 @@ public class YoutubeTask extends TimerTask {
 						list.onMessage(mess);
 				}
 			}
+		} catch (HttpStatusException e) {
+			e.printStackTrace();
+			
+			youtube.disconnect();
+			
+			int code = e.getStatusCode();
+			Result result = Result.ERROR;
+			
+			if(code == 403)
+				result = Result.QUOTA;
+			
+			for(IMessagesListener listener: youtube.listeners)
+				listener.onError(result, e);
+			
+			return;
 		} catch (Exception e) {
 			e.printStackTrace();
+			
 			youtube.disconnect();
+			
+			for(IMessagesListener listener: youtube.listeners)
+				listener.onError(Result.ERROR, e);
+			
 			return;
 		}
 	}
